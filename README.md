@@ -20,7 +20,7 @@ $this->widget('ext.mediaElement.MediaElementPortlet',
         //'model' => $model,
         //'attribute' => 'url'
         // its required and so you have to set correctly
-        // 'mimeType' =>'audio/mp3',
+        'mimeType' =>'video/mp4',
     )
 );
 ```
