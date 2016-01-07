@@ -15,7 +15,7 @@ Just use the widget anywhere in your view code.
 ```
 $this->widget('ext.mediaElement.MediaElementPortlet',
     array( 
-        'url' => 'http://www.toxsl.com/test/bunny.mp4',
+        'url' => 'http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4',
         // or you can set the model and attributes
         //'model' => $model,
         //'attribute' => 'url'
