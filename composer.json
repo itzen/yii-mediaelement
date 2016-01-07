@@ -17,7 +17,9 @@
   "config": {
     "process-timeout": 1800
   },
-  "config": {
-    "preferred-install": "dist"
+  "autoload": {
+    "classmap": [
+      "MediaElementPortlet.php"
+    ]
   }
 }
