@@ -35,6 +35,7 @@ class MediaElementPortlet extends CPortlet
     public $mediaType = 'audio';
     public $autoplay = true;
     public $htmlOptions = array();
+    public $disableRightClick = false;
 
     /**
      * Whether we have multiple media options to choose from for various browsers
@@ -154,7 +155,15 @@ class MediaElementPortlet extends CPortlet
         );
         ?>
 
-        <script>var player = new MediaElementPlayer('audio,video');</script>
+        <script>
+            var player = new MediaElementPlayer('audio,video');
+            <?php
+            if($this->disableRightClick){
+                echo 'var disableRightClick = true';
+            }
+            ?>
+        </script>
+
         <?php
 
     }
