@@ -36,6 +36,7 @@ class MediaElementPortlet extends CPortlet
     public $autoplay = true;
     public $htmlOptions = array();
     public $disableRightClick = false;
+    public $onlyPublishAssets = false;
 
     /**
      * Whether we have multiple media options to choose from for various browsers
@@ -113,7 +114,11 @@ class MediaElementPortlet extends CPortlet
     public function init()
     {
         parent::init();
-
+        if ($this->onlyPublishAssets) {
+            $this->resolvePackagePath();
+            $this->registerCoreScripts();
+            return;
+        }
         $model = $this->model;
         $att = $this->attribute;
         if ($this->url == null) $this->url = $model->$att;
@@ -145,7 +150,9 @@ class MediaElementPortlet extends CPortlet
     public function run()
     {
         parent::run();
-
+        if ($this->onlyPublishAssets) {
+            return;
+        }
         $tagContent = $this->tagContentGenerator();
 
         echo CHtml::tag(
@@ -153,18 +160,13 @@ class MediaElementPortlet extends CPortlet
             $this->htmlOptions,
             $tagContent
         );
-        ?>
+        $this->disableRightClick = $this->disableRightClick ? 'true' : 'false';
+        $js = <<<JS
+var player = new MediaElementPlayer('audio,video');
+var disableRightClick = {$this->disableRightClick};
+JS;
 
-        <script>
-            var player = new MediaElementPlayer('audio,video');
-            <?php
-            if($this->disableRightClick){
-                echo 'var disableRightClick = true';
-            }
-            ?>
-        </script>
-
-        <?php
+        Yii::app()->clientScript->registerScript('mediaelement', $js);
 
     }
 
