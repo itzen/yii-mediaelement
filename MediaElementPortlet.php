@@ -35,7 +35,6 @@ class MediaElementPortlet extends CPortlet
     public $mediaType = 'audio';
     public $autoplay = true;
     public $htmlOptions = array();
-    public $disableRightClick = false;
     public $onlyPublishAssets = false;
 
     /**
@@ -160,14 +159,11 @@ class MediaElementPortlet extends CPortlet
             $this->htmlOptions,
             $tagContent
         );
-        $this->disableRightClick = $this->disableRightClick ? 'true' : 'false';
         $js = <<<JS
 var player = new MediaElementPlayer('audio,video');
-var disableRightClick = {$this->disableRightClick};
 JS;
 
         Yii::app()->clientScript->registerScript('mediaelement', $js);
-
     }
 
     /**
